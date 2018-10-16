@@ -1,0 +1,148 @@
+\documentclass[12pt,a4paper,twoside]{article}
+\usepackage[pdfborder={0 0 0}]{hyperref}
+\usepackage[margin=25mm]{geometry}
+\usepackage{graphicx}
+\usepackage{parskip}
+\begin{document}
+
+\begin{center}
+\Large
+Computer Science Tripos -- Part II -- Project Proposal\\[4mm]
+\LARGE
+Audio to musical note transcriber\\[4mm]
+
+\large
+Sebastian Ion, Robinson College
+
+Originator: Sebastian Ion
+
+\today
+\end{center}
+
+\vspace{5mm}
+
+\textbf{Project Supervisors:} Dr A.~Mycroft \& Dr M.~Kuhn
+
+\textbf{Director of Studies:} Dr A.~Mycroft
+
+\textbf{Project Overseers:} Dr G.~Winskel \& Dr R.~Mortier
+
+% Main document
+
+\section*{Introduction}
+
+% \emph{The problem to be addressed.}
+The basic idea of the project is to employ Digial Signal Processing methods for pitch detection in WAV files representing monophonic music from a flute or recorder.
+The output would then be a MIDI-style file which will contain a series of \emph{ON} and \emph{OFF} events for the identified musical notes.
+\par
+The choice of the instrument was made while taking into consideration the characteristics of the soundwave produced by different musical instruments. A flute/recorder produces 'clean' sounds (almost no distortion, harmonics, or overtones) which makes pitch detection easier.
+For other instruments, such as guitars, the likelihood of the harmonics being 'louder' than the base note is very high.
+
+
+\section*{Starting point}
+I have gathered some sources (books, previous year's lecture notes) on Digital Signal Processing.
+I have also looked into and downloaded existing software for pitch detection which will be used for comparison in the evaluation stage:
+AnthemScore\footnote{https://www.lunaverus.com/home},
+ScoreCloud4\footnote{https://scorecloud.com/},
+Transcribe!\footnote{https://www.seventhstring.com/index.html},
+Melody Scanner\footnote{https://melodyscanner.com/},
+IntelliScoreEnsemble\footnote{http://www.intelliscore.net/index.html},
+AudioScore\footnote{http://www.sibelius.com/products/audioscore/ultimate.html}
+
+As most of the software previously listed is only available as trial versions they will not be used as the primary means of evaluation.
+
+I have downloaded a set of 20 WAV files each containing short riffs (around 10 seconds/riff) played on the recorder. They are fully annotated (with music sheets).
+
+\section*{Resources required}
+
+I will be using my personal machine (dual boot Windows 10/Ubuntu 16.04 LTS, Intel Core i7 2.60GHz, 8GB RAM, 1TB SSD + 1TB HDD) for development.
+  The project will be kept under a version control system (Git) and hosted on GitHub and GitLab. A weekly backup will also be stored on the MCS cluster.
+  In case of my laptop breaking I will clone the git repository and continue my work on an MCS machine in the Computer Laboratory. If the third party pitch detection software is non recoverable, then only Melody Scanner will be used for comparison as it is an online tool.
+
+\section*{Work to be done}
+
+The initial steps of the project would be to research the techniques needed for pitch detection.
+A major part of the project will consist of implementing and experimenting with different techniques.
+
+To ease implementation and testing the initial code will instead be built to identify the musical notes from pure soundwaves.
+After this component is working, the code will be tested on the set of WAV files and then changed accordingly to deal with harmonics (present in real instruments/sounds) and noise (caused by the recording device, compression, filetype conversion, etc.)
+
+The basic idea would be:
+\begin{itemize}
+  \item Apply FFT to break up the signal and use spectrum density estimation to infer frequency in the sampled signal;
+  \item Apply thresholding to the resulting signal;
+  \item Take the maximum energy level from each time slice and compute the base note;
+  \item Produce a MIDI file with the musical notes that have been identified.
+  \emph Additionally, produce a log of the notes that have been identified in order to compare with the ground truth;
+  \item Play the MIDI file and compare with original. Compare the music sheet (given with the set of WAV files) to the log of notes that have been generated. Run the third party software on the same file and compare results (both sound-wise and note-wise).
+\end{itemize}
+
+\section*{Success citerion}
+
+The project will be a success if every note is identified correctly in at least 80\% of the files in the test suite (i.e. 16/20).
+
+\section*{Possible extensions}
+
+Extensions will be considered in terms of the amount of time that is still available with each being evaluated separately.
+
+Some potential extensions:
+\begin{itemize}
+    \item Identify the musical notes from monophonic music produced by another instrument (e.g. guitar, piano)
+    \item Identify the musical notes from polyphonic music
+    \item Enhance with beat detection (for monophonic music)
+    \item Produce a MusicXML file as output (requires previous extension); this would allow the creation of a standard music sheet for a given audio file
+\end{itemize}
+
+\section*{Timetable}
+
+
+Planned starting date is 22/10/2018.
+
+\begin{enumerate}
+
+\item \textbf{Michaelmas weeks 3--4 (18\textsuperscript{nd} October - 31\textsuperscript{st} October)}
+  \begin{itemize}
+    \item General project setup: version-control, development evironment
+    \item Investigate programming language to be used. The main options would be Julia, Python, and MATLAB.
+  \end{itemize}
+
+\item \textbf{Michaelmas weeks 5--6 (1\textsuperscript{st} November - 14\textsuperscript{th} November)}
+  \begin{itemize}
+    \item Research and plan which DSP techniques will be used
+    \item Begin implementation of those techniques
+  \end{itemize}
+
+\item \textbf{Michaelmas weeks 7--8 (15\textsuperscript{th} November - 28\textsuperscript{th} November)}
+  Finish initial implementation and test on pure sine waves
+
+\item \textbf{Michaelmas vacation (29\textsuperscript{th} November - 16\textsuperscript{th} January)}
+  \begin{itemize}
+  \item Run existing code on the test suite and compare audio with original and notes with the provided music sheet.
+  \item Start fixing any issues that might arise (might include more research)
+  \end{itemize}
+
+\item \textbf{Lent weeks 1--2 (17\textsuperscript{th} January - 30\textsuperscript{th} January)}
+  \begin{itemize}
+    \item Write progress report and prepare for the presentation.
+    \item Finish core component of the project
+  \end{itemize}
+
+\item \textbf{Lent weeks 3--5 (31\textsuperscript{st} January - 20\textsuperscript{th} February)}
+  \begin{itemize}
+    \item Run code on more audio files and check results (start fixing if results not satisfactory)
+  \end{itemize}
+
+\item \textbf{Lent weeks 6--8 (21\textsuperscript{st} February - 13\textsuperscript{th} March)}
+  Prioritise extensions based on remaining time, technical difficulty, and degree of interest/improvement
+\item \textbf{Easter vacation (14\textsuperscript{th} March - 24\textsuperscript{th} April)}
+  Evaluate extensions and pass full draft dissertation to supervisors and Director of Studies.
+
+\item \textbf{Easter weeks 1--2 (25\textsuperscript{th} April - 8\textsuperscript{th} May)}
+  Adjust dissertation in light of comments and run additional performance tests.
+
+\item \textbf{Easter week 3 (9\textsuperscript{th} May - 15\textsuperscript{th} May)}
+  Proof reading and then an early submission so as to concentrate on examination revision.
+
+\end{enumerate}
+
+\end{document}
