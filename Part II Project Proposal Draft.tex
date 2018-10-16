@@ -38,7 +38,6 @@ The output would then be a MIDI-style file which will contain a series of \emph{
 The choice of the instrument was made while taking into consideration the characteristics of the soundwave produced by different musical instruments. A flute/recorder produces 'clean' sounds (almost no distortion, harmonics, or overtones) which makes pitch detection easier.
 For other instruments, such as guitars, the likelihood of the harmonics being 'louder' than the base note is very high.
 
-
 \section*{Starting point}
 I have gathered some sources (books, previous year's lecture notes) on Digital Signal Processing.
 I have also looked into and downloaded existing software for pitch detection which will be used for comparison in the evaluation stage:
@@ -64,7 +63,7 @@ I will be using my personal machine (dual boot Windows 10/Ubuntu 16.04 LTS, Inte
 The initial steps of the project would be to research the techniques needed for pitch detection.
 A major part of the project will consist of implementing and experimenting with different techniques.
 
-To ease implementation and testing the initial code will instead be built to identify the musical notes from pure soundwaves.
+To ease implementation and testing the initial code will instead be built to identify the musical notes from pure sound waves.
 After this component is working, the code will be tested on the set of WAV files and then changed accordingly to deal with harmonics (present in real instruments/sounds) and noise (caused by the recording device, compression, filetype conversion, etc.)
 
 The basic idea would be:
@@ -77,7 +76,9 @@ The basic idea would be:
   \item Play the MIDI file and compare with original. Compare the music sheet (given with the set of WAV files) to the log of notes that have been generated. Run the third party software on the same file and compare results (both sound-wise and note-wise).
 \end{itemize}
 
-\section*{Success citerion}
+A sample of the music that will be used can be found at: \\ https://www.youtube.com/watch?v=U9-2zioTUvM\footnote{video containing recorder music with scores}
+
+\section*{Success criterion}
 
 The project will be a success if every note is identified correctly in at least 80\% of the files in the test suite (i.e. 16/20).
 
@@ -102,7 +103,7 @@ Planned starting date is 22/10/2018.
 
 \item \textbf{Michaelmas weeks 3--4 (18\textsuperscript{nd} October - 31\textsuperscript{st} October)}
   \begin{itemize}
-    \item General project setup: version-control, development evironment
+    \item General project setup: version-control, development environment
     \item Investigate programming language to be used. The main options would be Julia, Python, and MATLAB.
   \end{itemize}
 
@@ -133,7 +134,10 @@ Planned starting date is 22/10/2018.
   \end{itemize}
 
 \item \textbf{Lent weeks 6--8 (21\textsuperscript{st} February - 13\textsuperscript{th} March)}
-  Prioritise extensions based on remaining time, technical difficulty, and degree of interest/improvement
+  \begin{itemize}
+    \item Prioritise extensions based on remaining time, technical difficulty, and degree of interest/improvement
+    \item Complete 'Introduction' and 'Preparation' sections of dissertation
+  \end{itemize}
 \item \textbf{Easter vacation (14\textsuperscript{th} March - 24\textsuperscript{th} April)}
   Evaluate extensions and pass full draft dissertation to supervisors and Director of Studies.
 
